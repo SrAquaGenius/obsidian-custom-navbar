@@ -1,9 +1,55 @@
 /*
+ * File: navbar.css
+ * Author: Diogo Vicente (aka SrAqua)
+ * Created: 2024-02-03
+ * Modified: 2024-02-08 19:02
+ */
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+ :root {
+	--custom-color: 0, 62, 78;
+	--navbar-heigt: 300px;
+}
 
-If your plugin does not need CSS, delete this file.
+.navbar {
+	background-color: rgb(var(--custom-color), 0.2);
+	border-radius: 5px;
+	height: var(--navbar-heigt);
+}
 
-*/
+.navbar-header {
+	background-color: rgb(var(--custom-color));
+	display: flex;
+	padding: 12px;
+	border-radius: inherit;
+	font-weight: 650;
+	font-size: x-large;
+	gap: var(--size-4-1);
+    line-height: var(--line-height-tight);
+}
+
+.navbar-sections {
+	display: inherit;
+	border-radius: inherit;
+	padding-left: 24px;
+	padding-right: 24px;
+	gap: 24px;
+}
+
+.navbar-section-header {
+	display: inherit;
+	border-radius: inherit;
+	padding-left: 6px;
+	padding-right: 6px;
+	gap: var(--size-4-1);
+}
+
+.navbar-content {
+	padding: 12px;
+
+	.navbar-section-content {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+}
+
 
