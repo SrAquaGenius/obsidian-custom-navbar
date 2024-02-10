@@ -7,13 +7,11 @@
 
  :root {
 	--custom-color: 0, 62, 78;
-	--navbar-heigt: 300px;
 }
 
 .navbar {
 	background-color: rgb(var(--custom-color), 0.2);
 	border-radius: 5px;
-	height: var(--navbar-heigt);
 }
 
 .navbar-header {

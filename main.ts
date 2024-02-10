@@ -1,3 +1,4 @@
+import Navbar from 'navbar';
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, TFile } from 'obsidian';
 
 // Remember to rename these classes and interfaces!
@@ -50,30 +51,52 @@ export default class CustomNavbar extends Plugin
 		{
 			console.log("Found navbar callouts!", callouts);
 			for (let c = 0; c < callouts.length; c++)
-				this.convertToNavBar(callouts[c]);
+			{
+				const callout = callouts[c];
+				const navbar = new Navbar(callout.parentElement, callout);
+				navbar.convert();
+			}
 		}
 	}
 
-	convertToNavBar(navbar: any)
+	convertToNavBar(parent:any, callout: any)
 	{
-		console.log(navbar);
+		console.log("Convert to Navbar", callout);
+		
+		// Create new element navbar
+		const navbar = parent.createEl("div");
+		navbar.classList.add("navbar");
+		console.log(parent);
 
 		// Customize the new navbar
-		navbar.classList.add('navbar');
-		navbar.classList.remove('callout');
-		const navbar_data = navbar.getAttribute('data-callout-metadata');
-		if (navbar_data !== null) navbar.setAttribute('navbar-data', navbar_data);
-		navbar.removeAttribute('data-callout-metadata');
-		navbar.removeAttribute('data-callout-fold');
-		navbar.removeAttribute('data-callout');
+		const info = callout.getAttribute('data-callout-metadata');
+		if (info !== null) {
+			const info_array = info.split("|");
+			navbar.setAttribute("navbar-data", info_array[0]);
+			navbar.style.display = info_array[1];
+		}
 
-		// Customize the new navbar header
-		const navbar_sections = this.convertToNavHeader(navbar);
 
-		// Customize the new navbar content
-		this.convertToNavContent(navbar, navbar_sections);
 
-		console.log("ConvertToNavBar()->#end", navbar);
+
+
+		// Customize the new navbar
+		// callout.classList.add('navbar');
+		// navbar.classList.remove('callout');
+		// const navbar_data = navbar.getAttribute('data-callout-metadata');
+		// if (navbar_data !== null) navbar.setAttribute('navbar-data', navbar_data);
+		// navbar.removeAttribute('data-callout-metadata');
+		// navbar.removeAttribute('data-callout-fold');
+		// navbar.removeAttribute('data-callout');
+
+		// // Customize the new navbar header
+		// const navbar_sections = this.convertToNavHeader(navbar);
+
+		// // Customize the new navbar content
+		// this.convertToNavContent(navbar, navbar_sections);
+
+		// console.log("ConvertToNavBar()->#end", navbar);
+		// callout.remove();
 	}
 
 	convertToNavHeader(navbar: any)
